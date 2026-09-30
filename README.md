@@ -9,6 +9,8 @@ The latest index snapshot (2026-09-30) reveals clear global tiers:
 Egypt is the cheapest App Store we track, with the typical subscription 56.2% below its US price. Turkey (−49.0%) and Nigeria (−48.2%) come next. At the other end, Denmark (+25.1%), United Kingdom (+23.7%) and Switzerland (+20.3%) charge more than the US. The data covers 18 countries, 2,320 subscription prices in the index and 3,120 prices in total, compiled by [OpenTheRank](https://opentherank.com/).
 
 Interactive version with a world map: https://opentherank.com/app-price-index/ · How it's calculated: https://opentherank.com/app-price-index/#method · Every version of this dataset: https://opentherank.com/open-data/app-price-index/
+<img width="2612" height="1540" alt="image" src="https://github.com/user-attachments/assets/757e3f5a-2f2b-4734-94b6-d40640d2ccae" />
+
 
 ## Grab the data
 
