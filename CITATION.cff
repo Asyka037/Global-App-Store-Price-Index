@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below and link to https://opentherank.com/open-data/app-price-index/"
+type: dataset
+title: "Global App Store Price Index"
+abstract: "The Global App Store Price Index measures how much the same app subscriptions cost in 18 countries compared with the United States. For each country it reports the median percentage difference between local prices and US prices for the same plans, converted to US dollars, together with its spread, a purchasing-power ratio based on IMF World Economic Outlook data, category medians, and the 3,120 individual prices behind every figure. Compiled by OpenTheRank (https://opentherank.com/open-data/app-price-index/) and published under CC BY 4.0."
+authors:
+  - alias: "40E0D0"
+    affiliation: "OpenTheRank"
+    website: "https://opentherank.com"
+version: "v2026.09.30"
+date-released: "2026-09-30"
+license: CC-BY-4.0
+url: "https://opentherank.com/open-data/app-price-index/"
+keywords:
+  - "price index"
+  - "App Store"
+  - "subscription pricing"
+  - "regional pricing"
+  - "purchasing power parity"
+  - "open data"

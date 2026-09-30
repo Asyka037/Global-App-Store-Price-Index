@@ -1,0 +1,33 @@
+{
+  "upload_type": "dataset",
+  "title": "Global App Store Price Index: App Store subscription prices in 18 countries compared with the United States",
+  "description": "<p>The Global App Store Price Index provides a transparent reference point for cross-border digital price parity. Built on a basket of leading software subscriptions compared like-for-like, it measures how local market pricing deviates from the dollar-standard baseline.</p>\n<p>For each country it gives the median difference between local App Store subscription prices and US prices for the same plans, converted to US dollars, with the 10th–90th percentiles, the share of subscriptions cheaper than in the US, a purchasing-power ratio based on IMF World Economic Outlook data, category medians and all 3,120 individual prices. Compiled by <a href=\"https://opentherank.com/\">OpenTheRank</a>; the interactive version is at <a href=\"https://opentherank.com/app-price-index/\">https://opentherank.com/app-price-index/</a>.</p>\n<p><strong>Snapshot v2026.09.30</strong> (2026-09-30). Cheapest relative to the US: Egypt (−56.2%), Turkey (−49.0%), Nigeria (−48.2%). Dearest: Denmark (+25.1%), United Kingdom (+23.7%), Switzerland (+20.3%). Prices checked up to 2026-09-29; exchange rates of 2026-09-29; purchasing power from the IMF World Economic Outlook, April 2026.</p>\n<p><strong>Files:</strong> <code>country_index_OpenTheRank.csv</code> (one row per country), <code>country_category_OpenTheRank.csv</code> (category medians), <code>prices_OpenTheRank.csv</code> and <code>data/countries/</code> (every price, also split by country), <code>country_index_history_OpenTheRank.csv</code>, <code>app-price-index_OpenTheRank.json</code> and <code>datapackage.json</code> (column types).</p>\n<p><strong>Method:</strong> each app is tracked at one plan and a country's price counts only when its store sells that plan on the same billing cycle as the US store. Local prices are converted at a single day's reference rate and compared with the US price; a country's index is the median of those differences. Countries need at least 30 matched subscriptions. Free listings are dropped, and prices more than three times the app's cross-country median, or that don't match the store's own listing, are left out. Details: <a href=\"https://opentherank.com/app-price-index/#method\">https://opentherank.com/app-price-index/#method</a>.</p>\n<p><strong>Caveats:</strong> prices outside the US and Canada include VAT or GST, US and Canadian prices exclude sales tax; one plan per app; an equally weighted basket of widely used subscriptions; prices read on a rolling schedule over the preceding weeks.</p>\n<p>License: CC BY 4.0. Please credit \"OpenTheRank Global App Store Price Index\" and link to <a href=\"https://opentherank.com/open-data/app-price-index/\">https://opentherank.com/open-data/app-price-index/</a>. Data sources: <a href=\"https://opentherank.com/data-sources/\">https://opentherank.com/data-sources/</a>. Not affiliated with Apple or any app listed.</p>",
+  "creators": [
+    {
+      "name": "40E0D0",
+      "affiliation": "OpenTheRank"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "language": "eng",
+  "keywords": [
+    "price index",
+    "App Store",
+    "subscription pricing",
+    "regional pricing",
+    "purchasing power parity",
+    "open data"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://opentherank.com/open-data/app-price-index/",
+      "relation": "isIdenticalTo",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "https://opentherank.com/app-price-index/",
+      "relation": "isDocumentedBy"
+    }
+  ]
+}

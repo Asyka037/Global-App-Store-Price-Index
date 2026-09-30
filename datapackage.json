@@ -1,0 +1,2123 @@
+{
+  "$schema": "https://datapackage.org/profiles/2.0/datapackage.json",
+  "name": "opentherank-global-app-store-price-index",
+  "title": "Global App Store Price Index (OpenTheRank)",
+  "description": "The Global App Store Price Index measures how much the same app subscriptions cost in 18 countries compared with the United States. For each country it reports the median percentage difference between local prices and US prices for the same plans, converted to US dollars, together with its spread, a purchasing-power ratio based on IMF World Economic Outlook data, category medians, and the 3,120 individual prices behind every figure. Compiled by OpenTheRank (https://opentherank.com/open-data/app-price-index/) and published under CC BY 4.0.",
+  "version": "v2026.09.30",
+  "created": "2026-09-30T00:00:00Z",
+  "homepage": "https://opentherank.com/open-data/app-price-index/",
+  "licenses": [
+    {
+      "name": "CC-BY-4.0",
+      "path": "https://creativecommons.org/licenses/by/4.0/",
+      "title": "Creative Commons Attribution 4.0 International"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "OpenTheRank",
+      "path": "https://opentherank.com",
+      "roles": [
+        "publisher"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Apple App Store storefronts and vendor pricing pages, read by OpenTheRank",
+      "path": "https://opentherank.com/data-sources/"
+    },
+    {
+      "title": "IMF World Economic Outlook (WEO April 2026), PPP conversion factors",
+      "path": "https://www.imf.org/en/Publications/WEO"
+    }
+  ],
+  "resources": [
+    {
+      "name": "countries",
+      "path": "data/country_index_OpenTheRank.csv",
+      "title": "Country index",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 2744,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the App Store storefront."
+          },
+          {
+            "name": "country",
+            "type": "string",
+            "description": "Country name in English."
+          },
+          {
+            "name": "rank",
+            "type": "integer",
+            "description": "Rank among the 18 countries, 1 = furthest below US prices."
+          },
+          {
+            "name": "index_pct_vs_us",
+            "type": "number",
+            "description": "The index: median percentage difference between this storefront's subscription prices and the US prices of the same plans, both converted to USD at the market rate. Negative = cheaper than the US."
+          },
+          {
+            "name": "p10_pct",
+            "type": "number",
+            "description": "10th percentile of the same per-plan percentage differences."
+          },
+          {
+            "name": "p25_pct",
+            "type": "number",
+            "description": "25th percentile."
+          },
+          {
+            "name": "p75_pct",
+            "type": "number",
+            "description": "75th percentile."
+          },
+          {
+            "name": "p90_pct",
+            "type": "number",
+            "description": "90th percentile."
+          },
+          {
+            "name": "cheaper_share",
+            "type": "number",
+            "description": "Share of the basket priced below the US (0 to 1)."
+          },
+          {
+            "name": "ppp_ratio",
+            "type": "number",
+            "description": "Median of price_usd / (PPP price level x us_price_usd), with the price level from IMF PPP conversion factors over the market rate (US = 1). 1 = in line with the country's general price level; above 1 = dearer than that level would suggest."
+          },
+          {
+            "name": "basket_n",
+            "type": "integer",
+            "description": "Subscriptions in the median: App Store and vendor-website plans with a US price, one plan per product."
+          },
+          {
+            "name": "usd_billed",
+            "type": "boolean",
+            "description": "True when this App Store storefront prices in US dollars, which pulls the index towards 0."
+          },
+          {
+            "name": "prices_as_of",
+            "type": "date",
+            "description": "Most recent day a price in the basket was checked."
+          },
+          {
+            "name": "fx_date",
+            "type": "date",
+            "description": "Day of the exchange rates used for the USD conversions."
+          },
+          {
+            "name": "ppp_source",
+            "type": "string",
+            "description": "Edition of the IMF World Economic Outlook the PPP factors come from."
+          }
+        ]
+      }
+    },
+    {
+      "name": "categories",
+      "path": "data/country_category_OpenTheRank.csv",
+      "title": "Category medians",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 4243,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the App Store storefront."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game. Only categories with at least 5 products in a country are listed."
+          },
+          {
+            "name": "median_pct_vs_us",
+            "type": "number",
+            "description": "Median percentage difference vs the US within the category. Mobile games are App Store games and are not part of the index itself."
+          },
+          {
+            "name": "n",
+            "type": "integer",
+            "description": "Products in the category median."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices",
+      "path": "data/prices_OpenTheRank.csv",
+      "title": "Prices, all 18 countries",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 675285,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "history",
+      "path": "data/country_index_history_OpenTheRank.csv",
+      "title": "Country index, every snapshot",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 2744,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the App Store storefront."
+          },
+          {
+            "name": "country",
+            "type": "string",
+            "description": "Country name in English."
+          },
+          {
+            "name": "rank",
+            "type": "integer",
+            "description": "Rank among the 18 countries, 1 = furthest below US prices."
+          },
+          {
+            "name": "index_pct_vs_us",
+            "type": "number",
+            "description": "The index: median percentage difference between this storefront's subscription prices and the US prices of the same plans, both converted to USD at the market rate. Negative = cheaper than the US."
+          },
+          {
+            "name": "p10_pct",
+            "type": "number",
+            "description": "10th percentile of the same per-plan percentage differences."
+          },
+          {
+            "name": "p25_pct",
+            "type": "number",
+            "description": "25th percentile."
+          },
+          {
+            "name": "p75_pct",
+            "type": "number",
+            "description": "75th percentile."
+          },
+          {
+            "name": "p90_pct",
+            "type": "number",
+            "description": "90th percentile."
+          },
+          {
+            "name": "cheaper_share",
+            "type": "number",
+            "description": "Share of the basket priced below the US (0 to 1)."
+          },
+          {
+            "name": "ppp_ratio",
+            "type": "number",
+            "description": "Median of price_usd / (PPP price level x us_price_usd), with the price level from IMF PPP conversion factors over the market rate (US = 1). 1 = in line with the country's general price level; above 1 = dearer than that level would suggest."
+          },
+          {
+            "name": "basket_n",
+            "type": "integer",
+            "description": "Subscriptions in the median: App Store and vendor-website plans with a US price, one plan per product."
+          },
+          {
+            "name": "usd_billed",
+            "type": "boolean",
+            "description": "True when this App Store storefront prices in US dollars, which pulls the index towards 0."
+          },
+          {
+            "name": "prices_as_of",
+            "type": "date",
+            "description": "Most recent day a price in the basket was checked."
+          },
+          {
+            "name": "fx_date",
+            "type": "date",
+            "description": "Day of the exchange rates used for the USD conversions."
+          },
+          {
+            "name": "ppp_source",
+            "type": "string",
+            "description": "Edition of the IMF World Economic Outlook the PPP factors come from."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-eg",
+      "path": "data/countries/prices_Egypt_OpenTheRank.csv",
+      "title": "Prices, Egypt",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 37935,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-tr",
+      "path": "data/countries/prices_Turkey_OpenTheRank.csv",
+      "title": "Prices, Turkey",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 40159,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-ng",
+      "path": "data/countries/prices_Nigeria_OpenTheRank.csv",
+      "title": "Prices, Nigeria",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 36178,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-pk",
+      "path": "data/countries/prices_Pakistan_OpenTheRank.csv",
+      "title": "Prices, Pakistan",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 36190,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-in",
+      "path": "data/countries/prices_India_OpenTheRank.csv",
+      "title": "Prices, India",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 37545,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-br",
+      "path": "data/countries/prices_Brazil_OpenTheRank.csv",
+      "title": "Prices, Brazil",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 37642,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-jp",
+      "path": "data/countries/prices_Japan_OpenTheRank.csv",
+      "title": "Prices, Japan",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 32930,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-ca",
+      "path": "data/countries/prices_Canada_OpenTheRank.csv",
+      "title": "Prices, Canada",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 40829,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-mx",
+      "path": "data/countries/prices_Mexico_OpenTheRank.csv",
+      "title": "Prices, Mexico",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 35518,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-kr",
+      "path": "data/countries/prices_South-Korea_OpenTheRank.csv",
+      "title": "Prices, South Korea",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 34645,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-ar",
+      "path": "data/countries/prices_Argentina_OpenTheRank.csv",
+      "title": "Prices, Argentina",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 32343,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-us",
+      "path": "data/countries/prices_United-States_OpenTheRank.csv",
+      "title": "Prices, United States",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 40358,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-au",
+      "path": "data/countries/prices_Australia_OpenTheRank.csv",
+      "title": "Prices, Australia",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 41687,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-fr",
+      "path": "data/countries/prices_France_OpenTheRank.csv",
+      "title": "Prices, France",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 37466,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-de",
+      "path": "data/countries/prices_Germany_OpenTheRank.csv",
+      "title": "Prices, Germany",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 38142,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-ch",
+      "path": "data/countries/prices_Switzerland_OpenTheRank.csv",
+      "title": "Prices, Switzerland",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 36626,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-gb",
+      "path": "data/countries/prices_United-Kingdom_OpenTheRank.csv",
+      "title": "Prices, United Kingdom",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 40697,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    },
+    {
+      "name": "prices-dk",
+      "path": "data/countries/prices_Denmark_OpenTheRank.csv",
+      "title": "Prices, Denmark",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "encoding": "utf-8-sig",
+      "bytes": 41336,
+      "schema": {
+        "fields": [
+          {
+            "name": "snapshot_date",
+            "type": "date",
+            "description": "Day this snapshot was taken (UTC)."
+          },
+          {
+            "name": "country_code",
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 code of the storefront."
+          },
+          {
+            "name": "product_slug",
+            "type": "string",
+            "description": "Stable product identifier on opentherank.com."
+          },
+          {
+            "name": "product",
+            "type": "string",
+            "description": "Product name."
+          },
+          {
+            "name": "category",
+            "type": "string",
+            "description": "ai, streaming, photo-video, productivity, education, social or mobile-game."
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "description": "app_store: the App Store storefront of that country. vendor_website: the vendor's own pricing page for that country."
+          },
+          {
+            "name": "plan",
+            "type": "string",
+            "description": "The plan compared across countries: one representative plan per product; for mobile games, the in-app item or game purchase compared."
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "description": "Billing period: week, month or year for subscriptions; one-time for most mobile-game rows (an in-app item or a paid game)."
+          },
+          {
+            "name": "price_local",
+            "type": "string",
+            "description": "The price exactly as the storefront printed it, in local currency."
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "description": "ISO 4217 code of price_local."
+          },
+          {
+            "name": "price_usd",
+            "type": "number",
+            "description": "price_local converted to USD at the snapshot's exchange rates (fx_date in the country index and the JSON file)."
+          },
+          {
+            "name": "us_price_usd",
+            "type": "number",
+            "description": "The same plan's US price in USD."
+          },
+          {
+            "name": "pct_vs_us",
+            "type": "number",
+            "description": "Percentage difference: (price_usd / us_price_usd - 1) x 100."
+          },
+          {
+            "name": "in_index",
+            "type": "boolean",
+            "description": "True for the subscriptions in index_pct_vs_us; false for App Store games, which only feed the mobile-game category median."
+          },
+          {
+            "name": "price_note",
+            "type": "string",
+            "description": "Set when the storefront lists several purchase entries matching the plan: which entry is published and why, in the words of the product page. Empty otherwise."
+          },
+          {
+            "name": "checked_at",
+            "type": "date",
+            "description": "Day the product's prices were last read from the store or vendor."
+          },
+          {
+            "name": "page_url",
+            "type": "string",
+            "description": "The opentherank.com page this price is published on."
+          }
+        ]
+      }
+    }
+  ]
+}
