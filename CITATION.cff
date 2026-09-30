@@ -11,6 +11,8 @@ version: "v2026.09.30"
 date-released: "2026-09-30"
 license: CC-BY-4.0
 url: "https://opentherank.com/open-data/app-price-index/"
+repository: "https://github.com/Asyka037/Global-App-Store-Price-Index"
+doi: "10.5281/zenodo.23052645"
 keywords:
   - "price index"
   - "App Store"

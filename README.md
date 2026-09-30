@@ -1,6 +1,6 @@
 # Global App Store Price Index
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23052645.svg)](https://doi.org/10.5281/zenodo.23052645) [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 The Global App Store Price Index provides a transparent reference point for cross-border digital price parity. Built on a basket of leading software subscriptions compared like-for-like, it measures how local market pricing deviates from the dollar-standard baseline.
 
@@ -133,7 +133,7 @@ The data is free to use under [CC BY 4.0](https://creativecommons.org/licenses/b
 
 Short credit: *Source: OpenTheRank Global App Store Price Index (opentherank.com), CC BY 4.0*
 
-Full citation: OpenTheRank (2026). Global App Store Price Index, snapshot 2026-09-30 (v2026.09.30) [Data set]. https://opentherank.com/open-data/app-price-index/. CC BY 4.0.
+Full citation: OpenTheRank (2026). Global App Store Price Index, snapshot 2026-09-30 (v2026.09.30) [Data set]. https://opentherank.com/open-data/app-price-index/. CC BY 4.0. https://doi.org/10.5281/zenodo.23052645
 
 The license covers our compilation and the figures we derive from it. The prices themselves are set by the stores and vendors, and product names and trademarks belong to their owners. OpenTheRank isn't affiliated with Apple or any of the apps listed. `ppp_ratio` is derived from IMF data (Source: International Monetary Fund, World Economic Outlook Database, April 2026). The exchange rates used for the conversions aren't included. Full terms: https://opentherank.com/terms/#data-license
 
@@ -145,6 +145,6 @@ Country reports: [Egypt](https://opentherank.com/app-price-index/egypt/) · [Tur
 
 ## Versions and corrections
 
-We take a new snapshot when there's reason to, not on a fixed schedule. Each one is a git tag and a GitHub release. Published versions are never edited; a fix arrives as a new version. All of them stay downloadable at https://opentherank.com/open-data/app-price-index/.
+We take a new snapshot when there's reason to, not on a fixed schedule. Each one is a git tag and a GitHub release, archived on Zenodo with its own DOI (the badge above always points to the latest). Published versions are never edited; a fix arrives as a new version. All of them stay downloadable at https://opentherank.com/open-data/app-price-index/.
 
 Spotted a wrong price? Email support@opentherank.com with the app and the country.

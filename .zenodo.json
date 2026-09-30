@@ -28,6 +28,10 @@
     {
       "identifier": "https://opentherank.com/app-price-index/",
       "relation": "isDocumentedBy"
+    },
+    {
+      "identifier": "https://github.com/Asyka037/Global-App-Store-Price-Index",
+      "relation": "isSupplementTo"
     }
   ]
 }
